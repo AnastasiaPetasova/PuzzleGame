@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import model.GameConstants;
 import model.PuzzleGame;
 import model.PuzzleGameException;
 
@@ -82,8 +81,6 @@ public class MenuScene extends AbstractGameController {
             }
         });
 
-        this.exitButton.setOnAction(actionEvent -> {
-            SceneSwitcher.INSTANCE.findStage(actionEvent).close();
-        });
+        this.exitButton.setOnAction(actionEvent -> SceneSwitcher.INSTANCE.findStage(actionEvent).close());
     }
 }

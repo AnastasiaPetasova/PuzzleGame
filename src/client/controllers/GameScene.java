@@ -120,8 +120,6 @@ public class GameScene extends AbstractGameController {
     }
 
     private void initMenuButton() {
-        menuButton.setOnAction(actionEvent -> {
-            SceneSwitcher.INSTANCE.setMenuScene(actionEvent, game);
-        });
+        menuButton.setOnAction(actionEvent -> SceneSwitcher.INSTANCE.setMenuScene(actionEvent, game));
     }
 }

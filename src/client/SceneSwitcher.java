@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.PuzzleGame;
 
-import javax.tools.Tool;
 import java.awt.*;
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -48,7 +47,6 @@ public class SceneSwitcher {
             try {
                 return loader.load();
             } catch (IOException ignored) {
-                ignored.printStackTrace();
                 return null;
             }
         }
@@ -76,16 +74,14 @@ public class SceneSwitcher {
         return (Stage) ((Node)event.getSource()).getScene().getWindow();
     }
 
-    private ResultInfo setScene(Stage stage, String sceneName, double width, double height,
-                                Consumer<ResultInfo> preShowAction) {
+    private void setScene(Stage stage, String sceneName, double width, double height,
+                          Consumer<ResultInfo> preShowAction) {
         ResultInfo info = createScene(sceneName, width, height);
 
         info.stage = stage;
 
         preShowAction.accept(info);
         setScene(stage, info.scene);
-        // info.stage.getScene().getStylesheets().add("styles.css");
-        return info;
     }
 
     private void setScene(Stage stage, Scene scene) {

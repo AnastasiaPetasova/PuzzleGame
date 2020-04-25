@@ -78,16 +78,6 @@ public class GameState implements GameConstants {
         this.lastOpened.add(new Point(x, y));
     }
 
-    public void removeTile(int x, int y) {
-        setTileState(x, y, REMOVED);
-        clearLastOpened();
-    }
-
-    public void closeTile(int x, int y) {
-        setTileState(x, y, CLOSED);
-        clearLastOpened();
-    }
-
     public void setTileState(int x, int y, int newState) {
         int oldState = tileStates[y][x];
         if (oldState != newState) {
@@ -96,10 +86,6 @@ public class GameState implements GameConstants {
             if (CLOSED == oldState) --closedTiles;
             if (CLOSED == newState) ++closedTiles;
         }
-    }
-
-    public int getClosedTiles() {
-        return closedTiles;
     }
 
     public boolean isGameEnded() {
