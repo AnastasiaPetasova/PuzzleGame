@@ -1,11 +1,14 @@
 package server;
 
-import model.*;
+import model.Field;
+import model.GameConstants;
+import model.PuzzleGame;
+import model.PuzzleGameException;
 
+import java.awt.*;
 import java.io.*;
-import java.rmi.RemoteException;
+import java.util.List;
 import java.util.*;
-import java.awt.Point;
 import java.util.concurrent.Callable;
 
 public class PuzzleGameServer implements Serializable, PuzzleGame, GameConstants {
@@ -20,15 +23,15 @@ public class PuzzleGameServer implements Serializable, PuzzleGame, GameConstants
         String message = "";
 
         if (width < 1 || width > MAX_WIDTH) {
-            message += String.format("width should be [%d; %d], but found %d;\n", 1, MAX_WIDTH, width);
+            message += String.format("Ширина должна быть [%d; %d], но найдена %d;\n", 1, MAX_WIDTH, width);
         }
 
         if (height < 1 || height > MAX_HEIGHT) {
-            message += String.format("height should be [%d; %d], but found %d; \n", 1, MAX_HEIGHT, height);
+            message += String.format("Высота должна быть [%d; %d], но найдена %d; \n", 1, MAX_HEIGHT, height);
         }
 
         if ((width * height) % 2 != 0) {
-            message += String.format("width x height should be even, but found %d; \n", width * height);
+            message += String.format("Общее количество клеток должно быть четным, но найдено %d; \n", width * height);
         }
 
         if (!message.isEmpty()) {
@@ -44,7 +47,7 @@ public class PuzzleGameServer implements Serializable, PuzzleGame, GameConstants
 
         if (imagesCount <= imagePairs) {
             throw new PuzzleGameException(
-                    String.format("There are %d image pairs, but images count is only %d", imagePairs, imagesCount)
+                    String.format("Всего %d пар тайлов, но доступных картинок только %d", imagePairs, imagesCount)
             );
         }
 
@@ -164,7 +167,7 @@ public class PuzzleGameServer implements Serializable, PuzzleGame, GameConstants
         }
 
         if (!canContinue()) {
-            throw new PuzzleGameException("There is no saved game");
+            throw new PuzzleGameException("Нет сохраненной игры");
         }
     }
 

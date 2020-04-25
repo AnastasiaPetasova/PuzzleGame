@@ -115,7 +115,7 @@ public class GameScene extends AbstractGameController {
         }
 
         if (game.isGameEnded()) {
-            setMessage("Игра окончена!");
+            setMessage("Победа!");
         }
     }
 
