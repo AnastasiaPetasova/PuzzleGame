@@ -17,8 +17,8 @@ import java.rmi.RemoteException;
 
 public class GameScene extends AbstractGameController {
 
-    public final static int CELL_WIDTH = 150;
-    public final static int CELL_HEIGHT = 150;
+    public final static int CELL_WIDTH = 128;
+    public final static int CELL_HEIGHT = 128;
 
     @FXML
     private GridPane fieldGridPane;
@@ -101,12 +101,16 @@ public class GameScene extends AbstractGameController {
                 Canvas tileCanvas = tiles[y][x];
                 GraphicsContext gc = tileCanvas.getGraphicsContext2D();
 
+                gc.setFill(Color.DARKGRAY);
+                gc.fillRect(0, 0, tileCanvas.getWidth(), tileCanvas.getHeight());
+
                 if (REMOVED == tile) {
                     gc.setFill(Color.BLACK);
                     gc.fillRect(0, 0, tileCanvas.getWidth(), tileCanvas.getHeight());
                 } else {
                     Image image = ThemeService.INSTANCE.getImage(tile);
-                    gc.drawImage(image, 0, 0);
+
+                    gc.drawImage(image, tileCanvas.getWidth() / 2 - image.getWidth() / 2, tileCanvas.getHeight() / 2 - image.getHeight() / 2);
                 }
 
                 gc.setStroke(Color.WHITE);

@@ -2,8 +2,10 @@ package client.controllers;
 
 import client.SceneSwitcher;
 import client.ThemeService;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import model.PuzzleGame;
@@ -12,6 +14,9 @@ import model.PuzzleGameException;
 import java.rmi.RemoteException;
 
 public class MenuScene extends AbstractGameController {
+
+    @FXML
+    private ListView<ThemeService.Theme> themesListView;
 
     @FXML
     private Spinner<Integer> widthSpinner;
@@ -32,8 +37,25 @@ public class MenuScene extends AbstractGameController {
     public void initializeBy(PuzzleGame game) throws RemoteException {
         super.initializeBy(game);
 
+        initThemes();
         initSpinners();
         initButtons();
+    }
+
+    private void initThemes() {
+        this.themesListView.setItems(
+                FXCollections.observableArrayList(
+                        ThemeService.INSTANCE.themes
+                )
+        );
+
+        this.themesListView.getSelectionModel().select(ThemeService.INSTANCE.selectedTheme);
+
+        this.themesListView.setEditable(false);
+
+        this.themesListView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> ThemeService.INSTANCE.selectedTheme = newValue
+        );
     }
 
     private void initSpinners() {

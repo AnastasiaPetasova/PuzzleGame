@@ -11,6 +11,7 @@ import model.PuzzleGame;
 
 import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.EventObject;
 import java.util.function.Consumer;
@@ -18,7 +19,7 @@ import java.util.function.Consumer;
 public class SceneSwitcher {
 
     private final static String MENU_SCENE_NAME = "menu";
-    private final static int MENU_SCENE_WIDTH = 450, MENU_SCENE_HEIGHT = 450;
+    private final static int MENU_SCENE_WIDTH = 550, MENU_SCENE_HEIGHT = 550;
 
     private final static String GAME_SCENE_NAME = "game";
     private final static int GAME_SCENE_WIDTH = 100, GAME_SCENE_HEIGHT = 100;
@@ -82,6 +83,14 @@ public class SceneSwitcher {
 
         preShowAction.accept(info);
         setScene(stage, info.scene);
+
+        URL url = this.getClass().getResource("styles.css");
+        if (url != null) {
+            String css = url.toExternalForm();
+            info.stage.getScene().getStylesheets().add(css);
+        }
+
+
     }
 
     private void setScene(Stage stage, Scene scene) {
