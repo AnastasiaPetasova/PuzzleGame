@@ -1,0 +1,10 @@
+В консоли:
+
+cd out\production\PuzzleGame
+start rmiregistry
+
+===
+
+Далее запускаем MainServer - он висит
+
+Потом запускаем MainClient - начнется игра
